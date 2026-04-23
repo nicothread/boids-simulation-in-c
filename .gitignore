@@ -57,5 +57,6 @@ CMakeCache.txt
 cmake_install.cmake
 cmake-build-debug
 Makefile
+boids
 
 .idea

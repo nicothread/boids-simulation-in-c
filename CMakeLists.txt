@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 project(boids C)
 
+set(BUILDDIR, "${CMAKE_BINARY_DIR}/build")
+
+file(MAKE_DIRECTORY "${BUILDDIR}")
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${BUILDDIR}")
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
