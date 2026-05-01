@@ -1,6 +1,9 @@
 #ifndef BOIDS_AGENT_HELPERS_H
 #define BOIDS_AGENT_HELPERS_H
 
+#include <math.h>
+#include <stdlib.h>
+
 static inline Vec2 v2add(Vec2 a, Vec2 b){ return (Vec2){a.x+b.x, a.y+b.y}; }
 static inline Vec2 v2sub(Vec2 a, Vec2 b){ return (Vec2){a.x-b.x, a.y-b.y}; }
 static inline Vec2 v2scale(Vec2 v, float s){ return (Vec2){v.x*s, v.y*s}; }
@@ -28,8 +31,8 @@ static float randf(float lo, float hi){
 }
 
 // Call from the agent itself to perform local flocking behaviors
-static Vec2 separation(Boid *boids, int idx);
-static Vec2 alignment(Boid *boids, int idx);
-static Vec2 cohesion(Boid *boids, int idx);
+// static Vec2 separation(Boid *boid);
+// static Vec2 alignment(Boid *boid);
+// static Vec2 cohesion(Boid *boid);
 
 #endif // BOIDS_AGENT_HELPERS_H

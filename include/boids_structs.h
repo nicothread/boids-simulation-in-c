@@ -1,16 +1,17 @@
 #ifndef BOIDS_STRUCTS_H
 #define BOIDS_STRUCTS_H
+#include "boids_consts.h"
 
-/* ── Types ──────────────────────────────────────────────────────────── */
 typedef struct {
     float x, y;
 } Vec2;
 
-typedef struct {
-    Vec2  pos;
-    Vec2  vel;
-    Vec2  acc;
-    float speed; // for re-presentation purpose
+typedef struct Boid {
+    Vec2 pos;
+    Vec2 vel;
+    Vec2 acc;
+    struct Boid **detectedBoids;
+    int num_detectedBoids;
 } Boid;
 
 #endif // BOIDS_STRUCTS_H

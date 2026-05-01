@@ -1,6 +1,9 @@
 #include "entity_renderer.h"
-#include "boids_consts.h"
+#include "world.h"
 #include <SDL2/SDL.h>
+
+#include "boids_agent_helper.h"
+#include "boids_consts.h"
 
 void draw_entity(SDL_Renderer *ren, Boid *b){
     float angle = atan2f(b->vel.y, b->vel.x);
@@ -23,9 +26,11 @@ void draw_entity(SDL_Renderer *ren, Boid *b){
     };
 
     /* Speed-based color: slow = teal, fast = warm orange */
-    Uint8 r = (Uint8)(80  + b->speed * 175);
-    Uint8 g = (Uint8)(200 - b->speed * 100);
-    Uint8 bv= (Uint8)(220 - b->speed * 180);
+    float speed = v2len(b->vel) / MAX_SPEED;
+
+    Uint8 r = (Uint8)(80  + speed * 175);
+    Uint8 g = (Uint8)(200 - speed * 100);
+    Uint8 bv= (Uint8)(220 - speed * 180);
 
     SDL_SetRenderDrawColor(ren, r, g, bv, 255);
 
@@ -39,7 +44,7 @@ void draw_entity(SDL_Renderer *ren, Boid *b){
     /* Simple approach: draw lines from tip to base edge */
     int steps = 8;
     for(int s = 0; s <= steps; s++){
-        float t = (float)s / steps;
+        float t = (float)s / (float) steps;
         SDL_FPoint lp = { left.x  + t*(right.x - left.x),
                           left.y  + t*(right.y - left.y) };
         SDL_RenderDrawLineF(ren, tip.x, tip.y, lp.x, lp.y);

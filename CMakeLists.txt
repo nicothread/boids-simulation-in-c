@@ -27,7 +27,7 @@ if(NOT TARGET SDL2::SDL2)
 endif()
 
 # ── Executable ────────────────────────────────────────────────────────
-add_executable(boids src/boids_agent.c src/bird_renderer.c src/sdl_renderer.c src/main.c)
+add_executable(boids src/boids/boids_agent.c src/boids/boids_sensors.c src/bird_renderer.c src/sdl_renderer.c src/main.c)
 target_include_directories(boids PUBLIC include)
 target_link_libraries(boids PRIVATE SDL2::SDL2 m)
 

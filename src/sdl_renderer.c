@@ -1,7 +1,6 @@
 #include "sdl_renderer.h"
-#include "boids_consts.h"
+#include "world.h"
 #include "boids_structs.h"
-
 #include "boids_agent.h"
 #include "entity_renderer.h"
 
@@ -9,7 +8,9 @@
 #include <SDL2/SDL.h>
 
 int sdl_init(struct SDL_Params *sdlParams) {
-    srand((unsigned)time(NULL));
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    srand((unsigned int)(ts.tv_sec ^ ts.tv_nsec));
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
@@ -34,8 +35,7 @@ int sdl_init(struct SDL_Params *sdlParams) {
 
 void sdl_main_loop(const struct SDL_Params *sdlParams) {
 
-    static Boid boids[NUM_BOIDS];
-    for(int i = 0; i < NUM_BOIDS; i++) boid_init(&boids[i]);
+    // --> At this point boids are initialized and ready for simulation
 
     SDL_bool running = SDL_TRUE;
     Uint32 t0 = SDL_GetTicks();
@@ -52,15 +52,15 @@ void sdl_main_loop(const struct SDL_Params *sdlParams) {
 
         /* Update all boids */
         for(int i = 0; i < NUM_BOIDS; i++) {
-            boid_update(boids, i);
-            update_entity(&boids[i]);
+            boid_update(&world_boids[i]);
+            update_entity(&world_boids[i]);
         }
 
         /* Render */
         SDL_SetRenderDrawColor(sdlParams->ren, 10, 12, 20, 255);   /* dark-navy bg */
         SDL_RenderClear(sdlParams->ren);
 
-        for(int i = 0; i < NUM_BOIDS; i++) draw_entity(sdlParams->ren, &boids[i]);
+        for(int i = 0; i < NUM_BOIDS; i++) draw_entity(sdlParams->ren, &world_boids[i]);
 
         SDL_RenderPresent(sdlParams->ren);
 
