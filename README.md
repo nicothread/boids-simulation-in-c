@@ -14,27 +14,6 @@ This implementation brings the famous boids algorithm to life through a visual s
 - **Configurable Parameters**: Easily adjustable simulation constants
 - **Clean Architecture**: Modular design with clear separation of concerns
 
-## Project Structure
-<code>
-boids/ 
-├── include/ # Header files
-├── boids_agent.h # Agent simulation logic
-├── boids_agent_helper.h # Agent helper utilities
-├── boids_consts.h # Simulation constants
-├── boids_structs.h # Data structures
-├── entity_renderer.h # Generic entity rendering
-└── sdl_renderer.h # SDL2 renderer backend 
-├── src/ # Source files
-├── main.c # Entry point and simulation loop
-├── boids_agent.c # Agent implementation
-├── bird_renderer.c # Bird visualization
-├── sdl_renderer.c # SDL2 backend implementation 
-├── CMakeLists.txt # Build configuration 
-├── LICENSE # MIT License 
-└── README.md # This file
-</code>
-
-
 ## Requirements
 
 - **C17** or later
